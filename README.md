@@ -4,7 +4,7 @@ Para lanzar la carpeta general, clic aquí:
 
 https://mybinder.org/v2/gh/tfmmaes/juanbraga/master
 
-Para lanzar el libro clic aquí: (ojo, el nombre del notebook puede cambiar en el futuro. Si falla lanzar la carpeta)
+Para lanzar los temas clic aquí: (ojo, el nombre del notebook puede cambiar en el futuro. Si falla, lanzar la carpeta)
 
 Tema1: 
 
