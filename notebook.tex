@@ -1,0 +1,1765 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\TeX{\mbox{T\kern-.14em\lower.5ex\hbox{E}\kern-.115em X}}
+    \def\LaTeX{\mbox{L\kern-.325em\raise.21em\hbox{$\scriptstyle{A}$}\kern-.17em}\TeX}
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{UD Estructuras de datos}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Estructuras de datos
+
+    Autor: Pablo Cerrillo Ruiz. Última modificación: 11 de mayo de 2019.
+
+    Índice
+
+    \begin{itemize}
+\tightlist
+\item
+  Section \ref{seccion_0}
+\item
+  Section \ref{seccion_1}
+\item
+  Section \ref{seccion_2}
+\item
+  Section \ref{seccion_2_1}
+\item
+  Section \ref{seccion_2_2}
+\item
+  Section \ref{seccion_2_3}
+\item
+  Section \ref{seccion_2_3_1}
+\item
+  Section \ref{seccion_2_3_2}
+\item
+  Section \ref{seccion_2_3_3}
+\item
+  Section \ref{seccion_3}
+\item
+  Section \ref{seccion_3_1}
+\item
+  Section \ref{seccion_4}
+\item
+  Section \ref{seccion_4_1}
+\item
+  Section \ref{seccion_4_2}
+\item
+  Section \ref{seccion_4_2_1}
+\item
+  Section \ref{seccion_4_2_2}
+\item
+  Section \ref{seccion_4_2_3}
+\item
+  Section \ref{seccion_5}
+\item
+  Section \ref{seccion_6}
+\item
+  Section \ref{seccion_7}
+\end{itemize}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{-1}
+\tightlist
+\item
+  ¿Qué es y cómo funciona Jupyter Notebooks?
+\end{enumerate}
+
+    Jupyter Notebook es un entorno de trabajo interactivo que permite
+desarrollar código de manera dinámica. Ahora mismo nos encontramos en el
+cuaderno UD Estructuras de datos, cuya finalidad es enseñar al alumno
+las diferentes estructuras de datos en Python y la utilidad que éstas
+tienen en el mundo de la programación.
+
+    
+
+    Recuerde que para ejecutar el contenido de una celda basta con pulsar el
+botón Run del panel de control. También puede pulsar al mismo tiempo las
+teclas Mayúsculas+Enter
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Introducción.
+\end{enumerate}
+
+    Una vez vistos los tipos de datos básicos del lenguaje de programación
+en Python (int, float, bool, complex, str ), puede ser que necesitemos
+realizar algún tipo de agrupación de éstos debido a lo que puedan
+representar en conjunto. Por ejemplo, imagine que tenemos que almacenar
+la temperatura de los últimos 5 días, una solución podría ser la
+siguiente:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Definiendo la temperatura de los últimos 5 días con distintas varibles\PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{temperatura\PYZus{}dia\PYZus{}1} \PY{o}{=} \PY{l+m+mf}{22.3}
+        \PY{n}{temperatura\PYZus{}dia\PYZus{}2} \PY{o}{=} \PY{l+m+mf}{25.2}
+        \PY{n}{temperatura\PYZus{}dia\PYZus{}3} \PY{o}{=} \PY{l+m+mf}{23.8}
+        \PY{n}{temperatura\PYZus{}dia\PYZus{}4} \PY{o}{=} \PY{l+m+mf}{27.9}
+        \PY{n}{temperatura\PYZus{}dia\PYZus{}5} \PY{o}{=} \PY{l+m+mf}{30.0}
+\end{Verbatim}
+
+
+    Como vemos, hemos creado 5 variables, una por cada día, para almacenar
+la temperatura. Esto supone un problema debido a que si quiesieráramos
+almacenar la temperatura de más días, tendríamos que modificar el código
+y añadir más variables. Para solucionar este problema, podemos usar las
+estructuras de datos de Python. Las 4 estructuras de datos más
+utilizadas en Python son:
+
+\begin{verbatim}
+<li style="margin-top: 0.5em; text-align: justify;">Listas.</li>
+<li style="margin-top: 0.5em; text-align: justify;">Tuplas.</li>
+<li style="margin-top: 0.5em; text-align: justify;">Conjuntos.</li>
+<li style="margin-top: 0.5em; text-align: justify;">Diccionarios.</li>  
+\end{verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Listas.
+\end{enumerate}
+
+    Las listas son secuencias ordenadas de cero o más elementos. Los listas
+son un tipo de dato mutable, es decir, podemos modificiar, añadir o
+borrar elementos de la lista.
+
+    
+
+    Podemos crear una lista de dos formas diferentes: mediante la función
+list() o mediante el uso de {[} {]} en la asignación a una variable.
+Veamos un ejemplo:
+
+    Ejemplo: Creación de listas en Python.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Creación de listas de Python \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Creación de una lista vacía mediante la función list()}
+        \PY{n}{lista\PYZus{}uno} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Creación de una lista vacía mediante el operador [ ]}
+        \PY{n}{lista\PYZus{}dos} \PY{o}{=} \PY{p}{[} \PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Creación de una lista con elementos de un mismo tipo de dato mediante el operador [ ]}
+        \PY{n}{lista\PYZus{}tres} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Creación de una lista }
+        \PY{n}{lista\PYZus{}cuatro} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hola}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mf}{5.3}\PY{p}{,} \PY{k+kc}{True}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mundo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Podemos imprimir el contenido entero de una lista mediante la función print}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{lista\PYZus{}uno}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{lista\PYZus{}dos}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{lista\PYZus{}tres}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{lista\PYZus{}cuatro}\PY{p}{)}
+\end{Verbatim}
+
+
+    Como hemos podido ver, las listas admiten elementos de diferentes tipos
+de datos.
+
+    ¡PRUEBA TÚ!
+
+    Crear dos listas, una lista vacía y otra lista con el nombre de 5
+asignaturas que conozcas. Imprime el contenido de las listas utilizando
+la función print.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Crear dos listas en imprimir el contenido de dichas listas. \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Crear aquí una lista vacía}
+        \PY{n}{lista\PYZus{}vacia} \PY{o}{=} 
+        
+        \PY{c+c1}{\PYZsh{} Crear una lista que contenga el nombre de 5 asignaturas}
+        \PY{n}{lista\PYZus{}asignaturas} \PY{o}{=}
+        
+        \PY{c+c1}{\PYZsh{} Imprimir aquí el contenido de las dos listas}
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    2.1 Accediendo a los elementos de una lista.
+
+    Anteriormente hemos visto que podemos imprimir el contenido de toda la
+lista mediante la función print pero ¿Y si necesitamos obtener un
+elemento en concreto de la lista?. Python proporciona la posibilidad de
+acceder a ellos mediante el operador {[} {]}. A continuación, vamos a
+crear una lista:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Creación de una lista }
+        \PY{n}{lista\PYZus{}ejemplo} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hola}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mf}{5.3}\PY{p}{,} \PY{k+kc}{True}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mundo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Podemos imprimir el contenido entero de una lista mediante la función print}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{lista\PYZus{}ejemplo}\PY{p}{)}
+\end{Verbatim}
+
+
+    En la siguiente imagen podemos ver una representación gráfica de la
+lista, donde se especifican los índices para acceder a los elementos de
+la lista creda anteriormente:
+
+    
+
+    Como podemos observar, tenemos dos formas de acceder a un elemento,
+mediante su índice o su índice inverso. Vamos a acceder al segundo
+elemento de la lista creada anteriormente de las dos formas:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Acceso al segundo elemento de la lista \PYZdq{}lista\PYZus{}ejemplo\PYZdq{} \PYZsq{}\PYZsq{}\PYZsq{}} 
+        
+        \PY{c+c1}{\PYZsh{} Creación de una lista }
+        \PY{n}{lista\PYZus{}ejemplo} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hola}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mf}{5.3}\PY{p}{,} \PY{k+kc}{True}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mundo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{lista\PYZus{}ejemplo}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}     \PY{c+c1}{\PYZsh{} accedemos al segundo elemento de la lista con su índice}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{lista\PYZus{}ejemplo}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}    \PY{c+c1}{\PYZsh{} accedemos al segundo elemento de la lista con su índice inverso}
+\end{Verbatim}
+
+
+    Podemos consultar el número de elementos de una lista mediante la
+función len de Python. Dicha función se puede utilizar con cualquier
+elemento iterable como listas, tuplas, conjuntos o cadenas de texto.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{lista\PYZus{}ejemplo}\PY{p}{)}
+\end{Verbatim}
+
+
+    Un operador fundamental en el uso de estructuras de datos es el operador
+in. El operador in nos indica si un elemento se encuentra o no la
+estructura de datos que especifiquemos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Acceso al segundo elemento de la lista \PYZdq{}lista\PYZus{}ejemplo\PYZdq{} \PYZsq{}\PYZsq{}\PYZsq{}} 
+        
+        \PY{c+c1}{\PYZsh{} Creación de una lista }
+        \PY{n}{lista\PYZus{}ejemplo} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hola}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mf}{5.3}\PY{p}{,} \PY{k+kc}{True}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mundo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hola}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{lista\PYZus{}ejemplo}\PY{p}{)} \PY{c+c1}{\PYZsh{} comprobamos si \PYZsq{}Hola\PYZsq{} se encuentra en la lista}
+        \PY{n+nb}{print}\PY{p}{(} \PY{l+m+mi}{5} \PY{o+ow}{in} \PY{n}{lista\PYZus{}ejemplo}\PY{p}{)}     \PY{c+c1}{\PYZsh{} comprobamos si 5 se encuentra en la lista}
+\end{Verbatim}
+
+
+    ¡PRUEBA TÚ!
+
+    En el siguiente ejercicio vamos a crear una lista con el nombre de 5
+asignaturas diferentes. Después imprimiremos aquellas que se encuentran
+en posición impar mediante su indice normal y las que se encuentran en
+una posición par con su índice inverso.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Crea una lista que contenga los nombres de 5 comidas diferentes \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{comidas} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Vamos a imprimir cada uno de los elementos}
+        \PY{n+nb}{print}\PY{p}{(} \PY{p}{)} \PY{c+c1}{\PYZsh{} el primer elemento mediante su índice normal}
+        \PY{n+nb}{print}\PY{p}{(} \PY{p}{)} \PY{c+c1}{\PYZsh{} el segundo elemento mediante su índice inverso}
+        \PY{n+nb}{print}\PY{p}{(} \PY{p}{)} \PY{c+c1}{\PYZsh{} el tercer elemento mediante su índice normal}
+        \PY{n+nb}{print}\PY{p}{(} \PY{p}{)} \PY{c+c1}{\PYZsh{} el cuarto elemento mediante su índice inverso}
+        \PY{n+nb}{print}\PY{p}{(} \PY{p}{)} \PY{c+c1}{\PYZsh{} el quinto elemento mediante su índice normal}
+        
+        \PY{c+c1}{\PYZsh{} Imprime el número de elementos que contiene la lista}
+        
+        \PY{c+c1}{\PYZsh{} Comprueba si \PYZsq{}pizza\PYZsq{} se encuentra en la lista comidas}
+\end{Verbatim}
+
+
+    2.2 La notación slice.
+
+    Es posible que tengamos la necesidad de obtener más de un elemento de
+una lista, es decir, una sublista. Una sublista es un conjunto de
+elementos más pequeño de la lista original.
+
+    
+
+    Para ello, Python permite indicar dentro del operador {[} {]} rangos de
+índices. A continuación, se muestra una imagen para describir las
+posibles características que se ofrecen:
+
+    
+
+    Donde:
+
+\begin{verbatim}
+<li style="margin-top: 0.5em; text-align: justify;"><b>Inicio</b>: Es el índice de inicio desde donde se empieza a obtener la sublista.</li>
+<li style="margin-top: 0.5em; text-align: justify;"><b>Fin</b>: Es el índice del último elemento. Cabe destacar que el último elemento incluido en la lista es el que ocupa la posición en el índice fin - 1 . Por lo tanto, el que ocupa la posición fin no entrará en la sublista.</li>
+\end{verbatim}
+
+Veamos un ejemplo:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Obteniendo diferentes sublistas a partir de una lista \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{deportes} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fútbol}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Baloncesto}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tenis}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bádminton}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Balonmano}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Padel}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rugby}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{c+c1}{\PYZsh{} lista original}
+        
+        \PY{c+c1}{\PYZsh{} imprimimos la lista original}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ Lista original }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{deportes}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} imprimimos los tres primeros deportes}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ Los tres primeros deportes de la lista son }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{deportes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Los tres primeros deportes de la lista son }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{deportes}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{7}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{} En este caso, utilizamos los índices inversos}
+        
+        \PY{c+c1}{\PYZsh{} imprimimos los tres últimos deportes}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ Los tres últimos deportes de la lista son }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{deportes}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{:}\PY{l+m+mi}{7}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} obtenemos la lista vacía si especificamos rangos cuyo valor final sea menor o igual que el inicial}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ Obtenemos la lista vacía }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{deportes}\PY{p}{[}\PY{l+m+mi}{7}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Obtenemos la lista vacía }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{deportes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    ¡CUIDADO! ya que si se nos olvida especificar el índice de inicio,
+Python da por sentado que estamos especificando el primer índice (0). Lo
+mismo ocurre con el índice final, si no se especifica, Python lo
+establece como el índice final de la lista.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Obteniendo diferentes sublistas a partir de una lista \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{deportes} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fútbol}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Baloncesto}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tenis}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bádminton}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Balonmano}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Padel}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rugby}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{c+c1}{\PYZsh{} lista original}
+        
+        \PY{c+c1}{\PYZsh{} imprimimos la lista original}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ Lista original }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{deportes}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} imprimimos los tres primeros deportes}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ Los tres primeros deportes de la lista son }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{deportes}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} imprimimos los tres últimos deportes}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ Los tres últimos deportes de la lista son }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{deportes}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Si no especificamos nada, nos devolverá la lista original}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ Obtenemos la lista original }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{deportes}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    Como podemos observar, una vez especificados el índice inicial y el
+final, vamos incrementado el valor inicial hasta quedarnos en el índice
+fin - 1, pero ¿Y si queremos recorrer la lista al revés o hacer que el
+índice incremente de otra forma?. Entonces deberíamos indicar el
+incremento en la notación slice de la siguiente forma:
+
+    
+
+    Donde:
+
+\begin{verbatim}
+<li style="margin-top: 0.5em; text-align: justify;"><b>Inicio</b>: Es el índice de inicio desde donde se empieza a obtener la sublista.</li>
+<li style="margin-top: 0.5em; text-align: justify;"><b>Fin</b>: Es el índice del último elemento. Cabe destacar que el último elemento incluido en la lista es el que ocupa la posición en el índice fin - 1 . Por lo tanto, el que ocupa la posición fin no entrará en la sublista.</li>
+<li style="margin-top: 0.5em; text-align: justify;"><b>Incremento</b>: valor entero que indica como se irá recorriendo la lista.</li>
+\end{verbatim}
+
+Ejemplo: Obtención de sublistas mediante la notación slice.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Obteniendo diferentes sublistas a partir de una lista \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{asignaturas} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Historia}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Matemáticas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lengua}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Inglés}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Francés}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Informática}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{c+c1}{\PYZsh{} lista original}
+        
+        \PY{c+c1}{\PYZsh{} imprimimos los deportes en una posición de índice impar}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ Las asignaturas de la lista en una posición con índice impar son }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{asignaturas}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} imprimimos los deportes en una posicion de índice par}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ Las asignaturas de la lista en una posición con índice par son}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{asignaturas}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    De esta forma, tenemos una mayor flexibilidad para obtener sublistas, ya
+que nos permite incluso obtener una lista de forma inversa, realizando
+decrementos:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Obteniendo diferentes sublistas a partir de una lista \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{asignaturas} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Historia}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Matemáticas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lengua}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Inglés}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Francés}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Informática}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{c+c1}{\PYZsh{} lista original}
+        
+        \PY{c+c1}{\PYZsh{} En esta ocasión realizaremos un decremento}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ Las asignaturas en una posición impar de la lista son }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{asignaturas}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    ¡PRUEBA TÚ!
+
+    En este ejercicio vamos a trabajar con sublistas. Para ello, se
+proporciona una lista, sobre la cuál se deberán obtener las sublistas
+que se especifican.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Obtener las sublistas especificadas   \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Lista original}
+        \PY{n}{videojuegos} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Batman: Arkham City}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pokémon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Phoenix Wright}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mario Kart}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FIFA 19}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Metal Gear V}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Brain Training}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Nº1 Sublista que contenga los videojuegos en un índice de posición par}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ La sublista nº1 es: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}  \PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Nº2 Sublista que contenga los videojuegos en un índice de posición par}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ La sublista nº2 es: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}  \PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Nº3 Sublista que contenga los videojuegos en un índice de posición par}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ La sublista nº3 es: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}  \PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Nº4 Sublista que los dos primeros elementos y los dos últimos}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ La sublista nº4 es: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}  \PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Nº5 Sublista que contenga los videojuegos en un índice de posición impar}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ La sublista nº5 es: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}  \PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Nº6 lista inversa a la original}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ La lista inversa nº6 es: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}  \PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Nº7 Sublista que contenga los videojuegos con un índice impar negativo.}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ La sublista nº7 es: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}  \PY{p}{)}
+\end{Verbatim}
+
+
+    2.3 Operaciones más comunes con listas en Python.
+
+    Llegados a este punto, ya sabemos crear listas y obtener elementos de un
+lista. Además de eso, Python permite modificar elementos de una lista,
+añadiendo nuevos elementos a la lista o eliminar elementos de la misma.
+
+    2.3.1 Modificar un elemento de la lista.
+
+    Para modificar un elemento de una lista, lo único que debemos hacer es
+asignar un valor a una posición indicada de la lista.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Modificando un elemento de una lista \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Definimos una lista}
+        \PY{n}{asignaturas} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Historia}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Matemáticas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lengua}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Inglés}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Francés}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Informática}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{asignaturas}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} modificamos el primer elemento de la lista}
+        \PY{n}{asignaturas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Filosofía}\PY{l+s+s2}{\PYZdq{}}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{asignaturas}\PY{p}{)}
+\end{Verbatim}
+
+
+    ¡PRUEBA TÚ!
+
+    En este ejercicio vamos a cambiar un elemento de nuestra lista de la
+compra.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Modificando elementos a una lista de la compra \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} lista de la compra para realizar una tortilla de patatas}
+        \PY{n}{lista\PYZus{}compra} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{patatas}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{huevos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{aceite de girasol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cebolla}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{   Vamos a sustituir el aceite de girasol por el aceite de oliva, }
+        \PY{l+s+sd}{   para ello, modificar el valor de la posición 2 de la lista}
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} imprimimos la lista de la compra }
+\end{Verbatim}
+
+
+    2.3.2 Añadir elementos a una lista.
+
+    Python proporciona los siguientes métodos para insertar elementos en una
+lista:
+
+    \begin{verbatim}
+<thead>
+  <tr>
+    <th style="text-align: center;">Método</th>
+    <th style="text-align: center;">Descripción</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td style="text-align: center;">append(X)</td>
+    <td style="text-align: left;">Añade el elemento X al final de la lista.</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">insert(i,X)</td>
+    <td style="text-align: left;">Añade el elemento X en la posición i de la lista.</td>
+  </tr>
+</tbody>
+\end{verbatim}
+
+    Ejemplo: Añadir elementos a una lista creada.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Añadiendo elementos a una lista \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Creamos una lista}
+        \PY{n}{objetos\PYZus{}mochila} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{portátil}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cargador}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{libreta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} añadimos mediante el método append al final de la lista el elemento \PYZsq{}bolígrafo\PYZsq{}}
+        \PY{n}{objetos\PYZus{}mochila}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bolígrafo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} añadimos en la posición 0, es decir al principio, elemento \PYZsq{}libro\PYZsq{}}
+        \PY{n}{objetos\PYZus{}mochila}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{libro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{objetos\PYZus{}mochila}\PY{p}{)} \PY{c+c1}{\PYZsh{} imprimimos la lista para ver el resultado final}
+\end{Verbatim}
+
+
+    ¡PRUEBA TÚ!
+
+    En este ejercicio vamos a utilizar las funciones para insertar elementos
+en una lista, para ello, se deberán añadir los elementos que se
+especifican a la lista que se proporciona e imprimir una vez hayamos
+realizado dichas inserciones.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Añadiendo elementos a una lista de la compra \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} lista de la compra para realizar una tortilla de patatas}
+        \PY{n}{lista\PYZus{}compra} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{patatas}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{huevos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Se me olvidó apuntar el aceite de oliva, añadirlo mediante el uso de la función append}
+        
+        \PY{c+c1}{\PYZsh{} Un poco de cebolla no vendría mal, añade cebolla en una posición intermedia para que no se nos olvide}
+        
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} imprimir la lista de la compra }
+\end{Verbatim}
+
+
+    2.3.3 Eliminar elementos de una lista.
+
+    Python proporciona los siguientes métodos para insertar eliminar en una
+lista:
+
+    \begin{verbatim}
+<thead>
+  <tr>
+    <th style="text-align: center;">Método</th>
+    <th style="text-align: center;">Descripción</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td style="text-align: center;">pop()</td>
+    <td style="text-align: left;">Devuelve y elimina el último elemento de la lista.</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">pop(i)</td>
+    <td style="text-align: left;">Devuelve el elemento en la posición i-ésima, es decir lista[i], y lo elimina de la lista.</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">clear()</td>
+    <td style="text-align: left;">Elimina todos los elementos de la lista.</td>
+  </tr>
+</tbody>
+\end{verbatim}
+
+    Ejemplo: Eliminar elementos de una lista creada.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Eliminar elementos de una lista \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Creamos una lista}
+        \PY{n}{objetos\PYZus{}mochila} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{portátil}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cargador}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{libreta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bolígrafo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{libro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        
+        \PY{n}{objetos\PYZus{}mochila}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Eliminamos el último elemento de la lista}
+        \PY{n}{objetos\PYZus{}mochila}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} Eliminamos el elemento en la posición 1}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{objetos\PYZus{}mochila}\PY{p}{)} \PY{c+c1}{\PYZsh{} imprimimos la lista para ver el resultado final}
+        
+        \PY{n}{objetos\PYZus{}mochila}\PY{o}{.}\PY{n}{clear}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Eliminamos todos los elementos de la lista}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{objetos\PYZus{}mochila}\PY{p}{)} \PY{c+c1}{\PYZsh{} imprimimos la lista para ver el resultado final}
+\end{Verbatim}
+
+
+    ¡PRUEBA TÚ!
+
+    ¡Vaya! Alguien ha modificado nuestra lista de la compra y ha añadido
+productos que no son necesarios para nuestra tortilla de patatas. Vamos
+a utilizar las funciones para eliminar elementos en una lista, para
+ello, se deberán añadir los elementos que se especifican a la lista que
+se proporciona e imprimir una vez hayamos realizado dichas inserciones.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Eliminando elementos a una lista de la compra \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} lista de la compra para realizar una tortilla de patatas}
+        \PY{n}{lista\PYZus{}compra} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{macarrones}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{patatas}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{huevos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{aceite de oliva}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{oreo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cebolla}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ ketchup}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Vamos a eliminar el último elemento de la lista, para ello, utilizaremos el metodo pop()}
+        
+        \PY{c+c1}{\PYZsh{} Ahora utilizaremos la variante pop(i) para eliminar los elementos en la posición 1 y 4}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} imprimimos la lista de la compra }
+        
+        \PY{c+c1}{\PYZsh{} Acabamos de terminar de realizar la compra, borra todos los elementos de la lista}
+\end{Verbatim}
+
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Tuplas.
+\end{enumerate}
+
+    Las tuplas son secuencias ordenadas de cero o más elementos. La única
+diferencia respecto a las lista es que una tupla es inmutable. Esto
+implica que una vez creada la tupla, no podemos modificar su contenido.
+
+    
+
+    Existen diferentes formas para crear tuplas. Las más usuales son
+utilizando la función tuple,mediante un conjunto de elementos separados
+por comas dentro de paréntesis ( ) o un conjunto de elementos separados
+por comas.
+
+    Ejemplo: Creación de tuplas en Python.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Creación de tuplas de Python \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Creación de una tupla vacía mediante la función tuple()}
+        \PY{n}{tupla\PYZus{}uno} \PY{o}{=} \PY{n+nb}{tuple}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Creación de una tupla vacía mediante el operador [ ]}
+        \PY{n}{tupla\PYZus{}dos} \PY{o}{=} \PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Creación de una tupla con elementos de un mismo tipo de dato mediante el operador ()}
+        \PY{n}{tupla\PYZus{}tres} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Creación de una tupla }
+        \PY{n}{tupla\PYZus{}cuatro} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hola}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mf}{5.3}\PY{p}{,} \PY{k+kc}{True}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mundo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} creación de una tupla }
+        \PY{n}{tupla\PYZus{}cinco} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hola}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mundo}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Podemos imprimir el contenido entero de una lista mediante la función print}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{tupla\PYZus{}uno}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{tupla\PYZus{}dos}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{tupla\PYZus{}tres}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{tupla\PYZus{}cuatro}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{tupla\PYZus{}cinco}\PY{p}{)}
+\end{Verbatim}
+
+
+    ¡Cuidado! si queremos crear una tupla utilizando paréntesis con un solo
+elemento, debemos añadir una coma.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Creación de tuplas de Python \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Creación de una tupla vacía mediante la función list()}
+        \PY{n}{tupla\PYZus{}uno} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Creación de una tupla vacía mediante el operador [ ]}
+        \PY{n}{tupla\PYZus{}dos} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Podemos imprimir el contenido entero de una lista mediante la función print}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{tupla\PYZus{}uno}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{es de tipo }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{type}\PY{p}{(}\PY{n}{tupla\PYZus{}uno}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{tupla\PYZus{}dos}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{es de tipo }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{type}\PY{p}{(}\PY{n}{tupla\PYZus{}dos}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    Como podemos observar, si no añadimos una coma dentro del paréntesís, al
+crear una tupla de un elemento, Python interpreta que se trata solamente
+de un número entero. He ahí la importancia de la coma.
+
+    ¡PRUEBA TÚ!
+
+    En este ejercicio vamos a crear varias tuplas. Para ello completar el
+código que se propone a continuación:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Completar el código para crear las tuplas que se proponen \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Crear una tupla vacía}
+        \PY{n}{tupla\PYZus{}vacia} \PY{o}{=} 
+        
+        \PY{c+c1}{\PYZsh{} Crear una tupla con un elemento que contenga el nombre de tu comida favorita}
+        \PY{n}{comida\PYZus{}favorita} \PY{o}{=}
+        
+        \PY{c+c1}{\PYZsh{} Crear una tupla que contenga los ingredientes que más te gustan en una pizza}
+        \PY{n}{ingredientes\PYZus{}favoritos} \PY{o}{=}
+        
+        \PY{c+c1}{\PYZsh{} Imprimir las tuplas}
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{)} 
+\end{Verbatim}
+
+
+    3.1 Accediendo a elementos de la tupla y obteniendo subtuplas.
+
+    Al igual que ocurre con las listas, Python proporciona la posibilidad de
+acceder a ellos mediante el operador {[}{]}. A continuación, vamos a
+crear una lista:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{mi\PYZus{}tupla} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hola}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mundo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mf}{2.3}\PY{p}{,} \PY{l+m+mf}{7.3}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mundo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{mi\PYZus{}tupla}\PY{p}{)}
+\end{Verbatim}
+
+
+    En la siguiente imagen podemos ver una representación gráfica de la
+tupla, donde se especifican los índices para acceder a los elementos de
+la lista creda anteriormente:
+
+    
+
+    Como podemos observar, tenemos dos formas de acceder a un elemento,
+mediante su índice o su índice inverso. Vamos a acceder al segundo
+elemento de la lista creada anteriormente de las dos formas:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Acceso al segundo elemento de la lista \PYZdq{}lista\PYZus{}ejemplo\PYZdq{} \PYZsq{}\PYZsq{}\PYZsq{}} 
+        
+        \PY{n}{mi\PYZus{}tupla} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hola}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mundo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mf}{2.3}\PY{p}{,} \PY{l+m+mf}{7.3}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mundo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{mi\PYZus{}tupla}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}     \PY{c+c1}{\PYZsh{} accedemos al segundo elemento de la lista con su índice}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{mi\PYZus{}tupla}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}    \PY{c+c1}{\PYZsh{} accedemos al segundo elemento de la lista con su índice inverso}
+\end{Verbatim}
+
+
+    Podemos consultar el número de elementos de una tupla mediante la
+función len() de Python. Dicha función se puede utilizar con cualquier
+elemento iterable como listas, tuplas, conjuntos o cadenas de texto.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{mi\PYZus{}tupla} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hola}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mundo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mf}{2.3}\PY{p}{,} \PY{l+m+mf}{7.3}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mundo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n+nb}{len}\PY{p}{(}\PY{n}{mi\PYZus{}tupla}\PY{p}{)} \PY{c+c1}{\PYZsh{} devuelve el número de elementos de la tupla}
+\end{Verbatim}
+
+
+    Un operador fundamental en el uso de estructuras de datos es el operador
+in. El operador in nos indica si un elemento se encuentra o no la
+estructura de datos que especifiquemos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{mi\PYZus{}tupla} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hola}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mundo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mf}{2.3}\PY{p}{,} \PY{l+m+mf}{7.3}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mundo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{esta} \PY{o}{=} \PY{l+m+mi}{5} \PY{o+ow}{in} \PY{n}{mi\PYZus{}tupla}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{esta}\PY{p}{)}
+\end{Verbatim}
+
+
+    Al igual que pasaba con las listas, es posible que tengamos la necesidad
+de obtener más de un elemento de una tupla, es decir, una subtupla. Una
+subtupla es un conjunto de elementos más pequeño de la tupla original.
+Para ello, utilizaremos la notación slice con las tuplas de la misma
+forma que con las listas.
+
+    
+
+    Donde:
+
+\begin{verbatim}
+<li style="margin-top: 0.5em; text-align: justify;"><b>Inicio</b>: Es el índice de inicio desde donde se empieza a obtener la sublista.</li>
+<li style="margin-top: 0.5em; text-align: justify;"><b>Fin</b>: Es el índice del último elemento. Cabe destacar que el último elemento incluido en la lista es el que ocupa la posición en el índice fin - 1 . Por lo tanto, el que ocupa la posición fin no entrará en la sublista.</li>
+<li style="margin-top: 0.5em; text-align: justify;"><b>Incremento</b>: valor entero que indica como se irá recorriendo la lista. Si no se especifica tomará el valor por defecto 1.</li>
+\end{verbatim}
+
+    Ejemplo: Obtener subtuplas a partir de una tupla.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Obteniendo diferentes subtuplas a partir de una tupla \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{asignaturas} \PY{o}{=} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Historia}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Matemáticas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lengua}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Inglés}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Francés}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Informática}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Tupla original}
+        
+        \PY{c+c1}{\PYZsh{} imprimir las asignaturas Matemáticas, Lengua e Inglés}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ Imprimir las asignaturas Matemáticas, Lengua e Inglés: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{asignaturas}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} imprimimos los deportes en una posición de índice impar}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ Las asignaturas de la tupla en una posición con índice impar son: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{asignaturas}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} imprimimos los deportes en una posicion de índice par}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ Las asignaturas de la tupla en una posición con índice par son: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{asignaturas}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} imprimimos tupla al revés}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ La tupla al revés: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{asignaturas}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    ¡PRUEBA TÚ!
+
+    En este ejercicio vamos a utilizar la funcionalidad vista anteriormente
+acerca del acceso a elementos de una tupla. Para ello, completa el
+código siguiendo las instrucciones.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Tuplas y notación slice \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} tupla\PYZus{}original}
+        \PY{n}{numeros} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Imprimir los elementos que se encuentra en la posición 4 y \PYZhy{}4}
+        \PY{n+nb}{print}\PY{p}{(} \PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(} \PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Asignarle a pares los elementos pares de tupla original utilizando la notación slice}
+        \PY{n}{pares} \PY{o}{=} 
+        
+        \PY{c+c1}{\PYZsh{} Asignarles a impares los elementos impares de la tupla original en orden descendente utilizando la notacion slice}
+        \PY{n}{impares} \PY{o}{=}
+        
+        \PY{c+c1}{\PYZsh{} Comprueba si 5 se encuentra contenido en pares}
+        \PY{n}{encontrado} \PY{o}{=} 
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{encontrado}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Imprime el número de elementos que contiene pares e impares}
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Conjuntos.
+\end{enumerate}
+
+    Los conjuntos son colecciones desordenadas de cero o más elementos. Al
+igual que las listas, son un tipo de dato mutable. Esto implica que una
+vez creado el conjunto podemos modificar, añadir y eliminar elementos de
+nuestro conjunto. Cabe destacar que los conjuntos no admiten
+repeticiones.
+
+    
+
+    Podemos crear un conjunto vacío con la función set o crear un conjunto
+que contenga elementos mediante una sucesión de elementos separados por
+comas dentro de los operadores \{ \}.
+
+    Ejemplo: Creación de conjuntos en Python
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Creación de conjuntos en Python \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{a} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Con set() podemos crear un conjunto vacío}
+        
+        \PY{n}{b} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} conjunto que contiene los números del 1 al 10}
+        
+        \PY{n}{c} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hola}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mf}{3.4}\PY{p}{,} \PY{k+kc}{True}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} conjunto con diferentes tipos de datos}
+        
+        \PY{n}{d} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} conjunto con repeticiones, las cuales serán eliminadas}
+        
+        \PY{c+c1}{\PYZsh{} imprimimos los diferentes conjuntos}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{c}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{d}\PY{p}{)}
+\end{Verbatim}
+
+
+    En este caso, no podemos crear un conjunto vacío mediante el uso de
+llaves \{ \}, ya que Python lo interpreta como la creación de un
+diccionario.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Creación de conjuntos en Python \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{a} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Con set() podemos crear un conjunto vacío}
+        
+        \PY{n}{b} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} diccionario vacío}
+        
+        \PY{c+c1}{\PYZsh{} imprimimos el tipo de dato de cada variable}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a es del tipo }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{type}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b es del tipo }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{type}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    Al igual que con las listas y las tuplas, utilizamos el método len( )
+para comprobar el número de elementos que componen el conjunto y el
+operador in para comprobar si un elemento pertenece al conjunto.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Elementos de un conjunto \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{c} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hola}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mf}{3.4}\PY{p}{,} \PY{k+kc}{True}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} conjunto con diferentes tipos de datos}
+        \PY{n}{d} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} conjunto con repeticiones, las cuales serán eliminadas}
+        
+        \PY{n}{esta} \PY{o}{=} \PY{k+kc}{True} \PY{o+ow}{in} \PY{n}{c}   \PY{c+c1}{\PYZsh{} comprobamos si el elemento True se encuentra en el conjunto}
+        \PY{n}{esta\PYZus{}dos} \PY{o}{=} \PY{l+m+mi}{8} \PY{o+ow}{in} \PY{n}{d}  \PY{c+c1}{\PYZsh{} comprobamos si el elemento 8 se encuentra en el conjunto}
+        
+        \PY{c+c1}{\PYZsh{} imprimimos los conjuntos y el número de elementos de cada uno}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{c}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{d}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El número de elementos del conjunto c es: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{c}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El número de elementos del conjunto d es: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{d}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{esta}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{esta\PYZus{}dos}\PY{p}{)}
+\end{Verbatim}
+
+
+    ¡PRUEBA TÚ!
+
+    En este ejercicio vamos a utilizar las funcionalidades vistas
+anteriormente. Para ello, completa el código siguiendo las
+instrucciones.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Creación de conjuntos \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Crear dos conjuntos, uno vacío y otro con 6 nombre de personas}
+        
+        \PY{n}{conjunto\PYZus{}vacio} \PY{o}{=} 
+        \PY{n}{personas} \PY{o}{=}
+        
+        \PY{c+c1}{\PYZsh{} Imprimir los conjuntos creados anteriormente}
+        
+        \PY{c+c1}{\PYZsh{} Imprimir el número de elementos de cada uno de los conjuntos}
+        
+        \PY{c+c1}{\PYZsh{} Comprobar si el nombre \PYZsq{}Pablo\PYZsq{} se encuentra en el conjunto personas}
+\end{Verbatim}
+
+
+    4.1 Añadir y eliminar elementos a un conjunto en Python.
+
+    Python proporciona los siguientes métodos para insertar y eliminar
+elementos en un conjunto:
+
+    \begin{verbatim}
+<thead>
+  <tr>
+    <th style="text-align: center;">Método</th>
+    <th style="text-align: center;">Descripción</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td style="text-align: center;">add(x)</td>
+    <td style="text-align: left;">Añade el elemento x al conjunto si no se encuentra.</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">discard(x)</td>
+    <td style="text-align: left;">Elimina el elemento x del conjunto.</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">clear()</td>
+    <td style="text-align: left;">Elimina todos los elementos del conjunto.</td>
+  </tr>
+</tbody>
+\end{verbatim}
+
+    Ejemplo: Añadiendo y elemento elementos del conjunto
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Añadiendo y eliminando elementos del conjunto \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{conjunto\PYZus{}asignaturas} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Matemáticas}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lengua}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Inglés}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{conjunto\PYZus{}asignaturas}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Añadimos un nuevo elemento \PYZsq{}Francés\PYZsq{} \PYZsq{}Informática\PYZsq{} y \PYZsq{}Matemáticas\PYZsq{}}
+        \PY{n}{conjunto\PYZus{}asignaturas}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Francés}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{conjunto\PYZus{}asignaturas}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Informática}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{conjunto\PYZus{}asignaturas}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Matemáticas}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{conjunto\PYZus{}asignaturas}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Eliminamos las asignaturas \PYZsq{}Lengua\PYZsq{}, \PYZsq{}Inglés\PYZsq{} e \PYZsq{}Historia\PYZsq{}}
+        \PY{n}{conjunto\PYZus{}asignaturas}\PY{o}{.}\PY{n}{discard}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lengua}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{conjunto\PYZus{}asignaturas}\PY{o}{.}\PY{n}{discard}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Inglés}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{conjunto\PYZus{}asignaturas}\PY{o}{.}\PY{n}{discard}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Historia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{conjunto\PYZus{}asignaturas}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Eliminamos todos los elementos del conjunto}
+        \PY{n}{conjunto\PYZus{}asignaturas}\PY{o}{.}\PY{n}{clear}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{conjunto\PYZus{}asignaturas}\PY{p}{)}
+\end{Verbatim}
+
+
+    ¡PRUEBA TÚ!
+
+    En este ejercicio vamos a poner en prueba los métodos para añadir y
+eliminar elementos de un conjunto. Para ello, completa el código del
+siguiente ejercicio.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Añadiendo y eliminado elementos del conjunto \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{a} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{} Añadir al conjunto a los elementos 1,5,11}
+        
+        \PY{c+c1}{\PYZsh{} Imprimir el conjunto}
+        
+        \PY{c+c1}{\PYZsh{} Eliminar del conjunto los elementos 2,6,10}
+        
+        \PY{c+c1}{\PYZsh{} Imprimir el conjunto}
+\end{Verbatim}
+
+
+    4.2 Operaciones más comunes con conjuntos en Python.
+
+    Python proporciona métodos y operadores para realizar operaciones con
+conjuntos. En este apartado veremos las tres operaciones más usadas con
+conjuntos: unión, intersección y diferencia.
+
+    4.2.1 Unión de conjuntos.
+
+    Sean A y B dos conjuntos, se define el conjunto A unión B como un nuevo
+conjunto donde tenemos todos los elementos del conjunto A junto con los
+elementos del conjunto B que no se encuentran en A.
+
+    
+
+    En Python, utilizamos el operador \textbar{} para realizar la unión de
+conjuntos.
+
+    Ejemplo: Unión de dos conjuntos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Unión de conjuntos \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Definimos los conjuntos}
+        \PY{n}{A} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{e}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+        \PY{n}{B} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{e}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{u}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+        
+        \PY{n}{C} \PY{o}{=} \PY{n}{A} \PY{o}{|} \PY{n}{B}   \PY{c+c1}{\PYZsh{} calculamos la unión de los dos conjuntos}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{C}\PY{p}{)} \PY{c+c1}{\PYZsh{} Imprimimos el conjunto C}
+\end{Verbatim}
+
+
+    4.2.2 Intersección de conjuntos
+
+    Sean A y B dos conjuntos, se define el conjunto A intersección B como un
+nuevo conjunto donde tenemos todos los elementos del conjunto A que
+aparecen también en el conjunto B.
+
+    
+
+    En Python, utilizamos el operador \& para realizar la intersección de
+conjuntos.
+
+    Ejemplo: Intersección de dos conjuntos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Intersección de conjuntos \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Definimos los conjuntos}
+        \PY{n}{A} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{e}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+        \PY{n}{B} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{e}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{u}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+        
+        \PY{n}{C} \PY{o}{=} \PY{n}{A} \PY{o}{\PYZam{}} \PY{n}{B}   \PY{c+c1}{\PYZsh{} calculamos la intersección de los dos conjuntos}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{C}\PY{p}{)} \PY{c+c1}{\PYZsh{} Imprimimos el conjunto C}
+\end{Verbatim}
+
+
+    4.2.3 Diferencia de conjuntos.
+
+    Sean A y B dos conjuntos, se define el conjunto A diferencia B como un
+nuevo conjunto donde tenemos todos los elementos del conjunto A que no
+aparecen en el conjunto B. Cuidado con esta operación, ya que A
+diferencia B es distinto a B diferencia A.
+
+    
+
+    En Python, utilizamos el operador - para realizar la diferencia de
+conjuntos.
+
+    Ejemplo: Diferencia de dos conjuntos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Diferencia de conjuntos \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Definimos los conjuntos}
+        \PY{n}{A} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{e}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+        \PY{n}{B} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{e}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{u}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+        
+        \PY{n}{C} \PY{o}{=} \PY{n}{A} \PY{o}{\PYZhy{}} \PY{n}{B}   \PY{c+c1}{\PYZsh{} calculamos la diferencia de los dos conjuntos}
+        \PY{n}{D} \PY{o}{=} \PY{n}{B} \PY{o}{\PYZhy{}} \PY{n}{A}   \PY{c+c1}{\PYZsh{} calculamos la diferencia de los dos conjuntos}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{C}\PY{p}{)} \PY{c+c1}{\PYZsh{} Imprimimos el conjunto C}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{D}\PY{p}{)} \PY{c+c1}{\PYZsh{} Imprimimos el conjunto D}
+\end{Verbatim}
+
+
+    ¡PRUEBA TÚ!
+
+    En este ejercicio vamos a probar las operaciones de unión, intersección
+y diferencia de conjuntos. Para ello, se proponen dos conjuntos de
+números, los cuales deberá rellenar y realizar las operaciones que se
+indican.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Completa el código del ejercicio \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Crear un conjunto que contenga los múltiplos de 2 del 0 al 10}
+        \PY{n}{A} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{} Crear un conjunto que contenga los múltiplos de 3 del 0 al 10}
+        \PY{n}{B} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{} Completa la sentencia para imprimir el conjunto A union B}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ La unión de los conjunto A y B es: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Completa la sentencia para imprimir el conjunto A union B}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ La intersección de los conjunto A y B es: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Completa la sentencia para imprimir el conjunto A union B}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ La diferencia del conjunto A respecto B es: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Completa la sentencia para imprimir el conjunto B diferencia A}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ La diferencia del conjunto B respecto A es: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Diccionarios.
+\end{enumerate}
+
+    En Python, un diccionario es un conjunto de claves que tienen asociados
+diversos valores al igual que un diccionario convencional. Cada clave
+tendrá asociado un valor o conjunto de valores, que no tiene por que ser
+del mismo tipo de dato que los otros valores asociados a las claves.
+Cabe destacar que los diccionarios no tienen un orden establecido, ya
+que sus valores los obtenemos mediante la clave y no mediante la
+posición que ocupan.
+
+    
+
+    En Python, para definir un diccionario, utilizamos llaves \{ \} y
+dentro, pares de claves y valores que contendrá el diccionario. También
+podemos crear un diccionario mediante la función dict(). Veamos un
+ejemplo de uso.
+
+    Ejemplo: Creación de diccionarios.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Definimos un diccionario donde cada clave es el año de estreno y el valor la película \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{diccionario\PYZus{}vacio} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Creación de un diccionario vacío}
+        
+        \PY{n}{diccionario\PYZus{}vacio\PYZus{}2} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} Creación de un diccionario vacío}
+        
+        \PY{n}{peliculas} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2013}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iron man 3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2011}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2016}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dr. Strange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2019}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Capitana Marvel}\PY{l+s+s1}{\PYZsq{}} 
+                    \PY{p}{\PYZcb{}}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{diccionario\PYZus{}vacio}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{diccionario\PYZus{}vacio\PYZus{}2}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{peliculas}\PY{p}{)}
+\end{Verbatim}
+
+
+    ¡PRUEBA TÚ!
+
+    En este ejercicio vamos a poner en práctica las diferentes maneras de
+crear un diccionario. Para ello, completa el código del siguiente
+ejercicio.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Creación de diccionarios \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Crear un diccionario vacío }
+        
+        \PY{n}{diccionario\PYZus{}vacio} \PY{o}{=}
+        
+        
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Crear un diccionario que contenga las claves y valores }
+        \PY{l+s+sd}{        \PYZsq{}C1\PYZsq{} tendrá asociado el valor 5}
+        \PY{l+s+sd}{        \PYZsq{}C2\PYZsq{} tendrá asociado la cadena \PYZsq{}Hola\PYZsq{}}
+        \PY{l+s+sd}{        \PYZsq{}C3\PYZsq{} tendrá asociado la cadena \PYZsq{}Mundo\PYZsq{}}
+        \PY{l+s+sd}{        \PYZsq{}C4\PYZsq{} tendrá asociado la lista [1,2,3,4,5,6,7,8,9,10]   }
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{diccionario} \PY{o}{=} \PY{p}{\PYZob{}}
+        
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    5.1 Operaciones más comunes con diccionarios en Python.
+
+    Python proporciona métodos para gestionar de forma sencilla nuestros
+diccionarios. A continuación se muestran los métodos más utilizados para
+la gestión de diccionarios:
+
+    \begin{verbatim}
+<thead>
+  <tr>
+    <th style="text-align: center;">Método</th>
+    <th style="text-align: center;">Descripción</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td style="text-align: center;">get('clave')</td>
+    <td style="text-align: left;">Devuelve el valor asociado a la clave introducida.</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">pop('clave')</td>
+    <td style="text-align: left;">Devuelve el valor asociado a la clave introducida y elimina la entrada en el diccionario.</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">update({'clave': 'valor'})</td>
+    <td style="text-align: left;">Si la clave ya existe en el diccionario, actualiza su valor asociado. En otro caso, crea una nueva entrada</td>
+  </tr>
+</tbody>
+\end{verbatim}
+
+    Podemos obtener el valor asociado a una clave mediante el uso del método
+get o llamando al diccionario con el operador {[} {]} y la clave dentro.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Obteniendo valores del diccionario \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{peliculas} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2011}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2013}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iron man 3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2016}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dr. Strange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2019}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Capitana Marvel}\PY{l+s+s1}{\PYZsq{}} 
+                    \PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{} Vamos a obtener valores del diccionario}
+        
+        \PY{n+nb}{print}\PY{p}{(} \PY{n}{peliculas}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2011}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{p}{)}    \PY{c+c1}{\PYZsh{} Muestra como salida la cadena Thor}
+        
+        \PY{n+nb}{print}\PY{p}{(} \PY{n}{peliculas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2016}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{p}{)}        \PY{c+c1}{\PYZsh{} Muestra como salida Dr. Strange}
+\end{Verbatim}
+
+
+    La diferencia entre ambas formas radica en que pop borra la entrada que
+ha devuelto, mientras que get no la borra. Si la clave proporcionada no
+existiese en el diccionario mientras que el método get devolvería el
+valor None, el método pop devolvería un KeyError.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print}\PY{p}{(} \PY{n}{peliculas}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2011}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{p}{)}    \PY{c+c1}{\PYZsh{} Muestra como salida la cadena Thor}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print}\PY{p}{(} \PY{n}{peliculas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2016}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{p}{)}        \PY{c+c1}{\PYZsh{} Muestra como salida Dr. Strange}
+\end{Verbatim}
+
+
+    Podemos añadir o actualizar el contenido de nuestro diccionario
+utilizando el método update o asignandole a una clave directamente y un
+valor.
+
+    Ejemplo: Añadiendo y actualizando elementos de un diccionario
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Añadiendo y actualizando elementos de un diccionario \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{peliculas} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2011}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2013}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iron man 3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2016}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dr. Strange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2019}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Capitana Marvel}\PY{l+s+s1}{\PYZsq{}} 
+                    \PY{p}{\PYZcb{}}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{peliculas}\PY{p}{)}   \PY{c+c1}{\PYZsh{} imprimimos el contenido del diccionario}
+        
+        \PY{c+c1}{\PYZsh{} Vamos a obtener valores del diccionario}
+        
+        \PY{n}{peliculas}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2008}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iron Man}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}           \PY{c+c1}{\PYZsh{} Insertamos un nuevo valor y clave}
+        \PY{n}{peliculas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2014}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Guardianes de la Galaxia}\PY{l+s+s1}{\PYZsq{}}  \PY{c+c1}{\PYZsh{} Insertamos un nuevo valor y clave}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{peliculas}\PY{p}{)}  \PY{c+c1}{\PYZsh{} imprimimos el contenido del diccionario}
+        
+        \PY{n}{peliculas}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2008}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{El increible Hulk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Actualizamos la clave 2008 con el valor nuevo}
+        \PY{n}{peliculas}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2019}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=}  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Avengers 4: Endgame}\PY{l+s+s1}{\PYZsq{}}      \PY{c+c1}{\PYZsh{} Actualizamos la clave 2019 con el valor nuevo}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{peliculas}\PY{p}{)}   \PY{c+c1}{\PYZsh{} imprimimos el contenido del diccionario}
+\end{Verbatim}
+
+
+    Podemos añadir o actualizar el contenido de nuestro diccionario
+utilizando el método pop.
+
+    Ejemplo: Eliminando elementos de un diccionario
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Eliminando elementos de un diccionario \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{peliculas} \PY{o}{=} \PY{p}{\PYZob{}}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2011}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2013}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iron man 3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2016}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dr. Strange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2019}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Avengers 4: Endgame}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2008}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{El increible Hulk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2014}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Guardianes de la Galaxia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{peliculas}\PY{p}{)}  \PY{c+c1}{\PYZsh{} imprimimos el contenido del diccionario}
+        
+        \PY{c+c1}{\PYZsh{} Eliminamos la clave 2008 y 2014}
+        \PY{n}{peliculas}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2014}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{peliculas}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2008}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{peliculas}\PY{p}{)}  \PY{c+c1}{\PYZsh{} imprimimos el contenido del diccionario}
+\end{Verbatim}
+
+
+    ¡PRUEBA TÚ!
+
+    En este ejercicio vamos a poner en práctica los diferentes métodos que
+permiten gestionar un diccionario en Python. Para ello, completa el
+código del siguiente ejercicio.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} Trabajando con diccionarios  \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{premios\PYZus{}BAFTA} \PY{o}{=} \PY{p}{\PYZob{}}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2003\PYZhy{}2004}\PY{l+s+s1}{\PYZsq{}} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Half\PYZhy{}life 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2007\PYZhy{}2008}\PY{l+s+s1}{\PYZsq{}} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Super Mario Galaxy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2009}\PY{l+s+s1}{\PYZsq{}} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Batman Arkham Asylum}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2013}\PY{l+s+s1}{\PYZsq{}} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The Last of Us}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2016}\PY{l+s+s1}{\PYZsq{}} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Uncharted 4}\PY{l+s+s1}{\PYZsq{}}
+        \PY{p}{\PYZcb{}}
+        
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Añadir a nuestro diccionario la clave \PYZsq{}2018\PYZsq{} con el valor asociado \PYZsq{}God of War\PYZsq{}}
+        
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Consultar mediante el método get el valor de la clave 2007\PYZhy{}2008}
+        
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Eliminar aquellos elementos del diccionario cuya clave sea menor al 2005}
+        
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Modificar el contenido de la clave 2016 para que sea igual a Uncharted 4: A Thief`s End}
+        
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Imprimir el diccionario}
+\end{Verbatim}
+
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  ¿Qué hemos aprendido?.
+\end{enumerate}
+
+    
+
+    Una vez terminado el cuaderno, vamos a realizar un pequeño resumen
+acerca de lo visto hasta ahora:
+
+\begin{verbatim}
+<li>Python proporciona diferentes estructuras de datos para realizar colecciones de elementos. Dichas estructuras son: <b>listas</b>, <b>tuplas</b>, <b>conjuntos</b> y <b>diccionarios</b>.</li>
+<li style="margin-top: 1em; text-align: justify;"><b>Las estructuras de datos pueden ser mutables</b>, si permiten modificar su contenido una vez creadas, o <b>inmutables</b>, si no permite modificar su contenido una vez creadas. Listas , conjuntos y diccionarios son estructuras mutables y la tupla es una estructura inmutable.</li>
+<li style="margin-top: 1em; text-align: justify;"><b> Los elementos de una lista o una tupla se encuentran ordenados</b>. Esto permite que se puede utilizar la <b>notación slice para la obtención de sublistas o subtuplas.</b></li>
+<li style="margin-top: 1em; text-align: justify;"><b>Los conjuntos no admiten repetición de elementos y sus elementos no tienen un orden establecido.</b>Python proporciona métodos para realizar operaciones con conjuntos como la unión, la intersección y la diferencia.</li>
+<li style="margin-top: 1em; text-align: justify;"><b>Los diccionarios son un conjunto de pares clave-valor.</b>Sus elementos no tienen un orden establecido. Las claves de un diccionario son únicas, es decir, no puede haber dos iguales. Sin embargo, los valores no tienen porque ser únicos.</li>
+\end{verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Relación de ejercicios.
+\end{enumerate}
+
+    
+
+    {EJERCICIO 1}: ¿Sabrías decir cuál es la salida del siguiente código sin
+ejecutarlo?.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Elimina las comillas para ejercutar el código y comprobar el resultado de salida.}
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{l+s+sd}{mi\PYZus{}lista = list()}
+        \PY{l+s+sd}{mi\PYZus{}tupla = tuple()}
+        \PY{l+s+sd}{mi\PYZus{}conjunto = set()}
+        \PY{l+s+sd}{mi\PYZus{}diccionario = dict()}
+        
+        \PY{l+s+sd}{print(mi\PYZus{}lista)}
+        \PY{l+s+sd}{print(mi\PYZus{}tupla)}
+        \PY{l+s+sd}{print(mi\PYZus{}conjunto)}
+        \PY{l+s+sd}{print(mi\PYZus{}diccionario)}
+        
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+\end{Verbatim}
+
+
+    {EJERCICIO 2}: ¿Sabrías decir cuál es la salida del siguiente código sin
+ejecutarlo?.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Elimina las comillas para ejercutar el código y comprobar el resultado de salida.}
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{l+s+sd}{estructura = \PYZob{}\PYZcb{}}
+        
+        \PY{l+s+sd}{print(estructura)}
+        \PY{l+s+sd}{print(\PYZdq{}\PYZbs{}n\PYZdq{},type(estructura))}
+        
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+\end{Verbatim}
+
+
+    {EJERCICIO 3}: ¿Sabrías decir cuál es la salida del siguiente código sin
+ejecutarlo?.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Elimina las comillas para ejercutar el código y comprobar el resultado de salida.}
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{l+s+sd}{mi\PYZus{}lista = [1,2,3,4,5,6,7,8,9,10]}
+        \PY{l+s+sd}{mi\PYZus{}tupla = (\PYZsq{}a\PYZsq{},\PYZsq{}c\PYZsq{},\PYZsq{}u\PYZsq{},\PYZsq{}r\PYZsq{},\PYZsq{}r\PYZsq{},\PYZsq{}u\PYZsq{},\PYZsq{}c\PYZsq{},\PYZsq{}a\PYZsq{})}
+        
+        \PY{l+s+sd}{print(mi\PYZus{}lista[::2])}
+        \PY{l+s+sd}{print(mi\PYZus{}lista[2::3])}
+        
+        \PY{l+s+sd}{print(mi\PYZus{}tupla[::])}
+        \PY{l+s+sd}{print(mi\PYZus{}tupla[\PYZhy{}1:\PYZhy{}9:\PYZhy{}1])}
+        
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+\end{Verbatim}
+
+
+    {EJERCICIO 4}: ¿Sabrías decir cuál es la salida del siguiente código sin
+ejecutarlo?.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Elimina las comillas para ejercutar el código y comprobar el resultado de salida.}
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{l+s+sd}{primos = \PYZob{}1, 2, 3, 5, 7, 11, 13, 17\PYZcb{}}
+        
+        \PY{l+s+sd}{primos.add(19)}
+        \PY{l+s+sd}{primos.add(23)}
+        \PY{l+s+sd}{primos.discard(2)}
+        \PY{l+s+sd}{primos.discard(1)}
+        
+        \PY{l+s+sd}{print(\PYZdq{}\PYZbs{}n\PYZdq{},primos)}
+        \PY{l+s+sd}{print(\PYZdq{}\PYZbs{}n\PYZdq{},type(primos))}
+        
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+\end{Verbatim}
+
+
+    {EJERCICIO 5}: Realiza cambios en el la notación slice para imprimir los
+múltiplos de 3 mayores que o iguales que 10 y menores que 22.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}\PYZsh{} La salida debería ser [12,15,18,21]}
+        
+        \PY{n}{multiplos\PYZus{}3} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{18}\PY{p}{,} \PY{l+m+mi}{21}\PY{p}{,} \PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{27}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{multiplos\PYZus{}3}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    {EJERCICIO 6}: Realiza cambios en el la notación slice para imprimir la
+lista de elementos en orden decreciente situados en índice impar
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}\PYZsh{} La salida debería ser [23,17,11,5,2]}
+        \PY{n}{primos} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{,} \PY{l+m+mi}{13}\PY{p}{,} \PY{l+m+mi}{17}\PY{p}{,} \PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{23}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{primos}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    {EJERCICIO 7}: Crear un diccionario donde la clave será el nombre del
+país y el valor asociado una lista con las 3 comidas típicas del país.
+Busca información acerca de la comida de los siguientes países y
+añadelos en el diccionario: España, Portugal, Francia e Italia.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
